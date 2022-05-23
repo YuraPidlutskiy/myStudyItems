@@ -1,0 +1,3 @@
+*.log - ignore all the log file 
+logs/ - ignore the log directory
+someignorefiles.txt - all what the need to be ignored 

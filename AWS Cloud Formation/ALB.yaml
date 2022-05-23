@@ -1,0 +1,139 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create Auto Scale Group and Load Balancer For Test
+Parameters:
+  InstanceType:
+    Description: test instance type
+    Type: String
+    Default: t3a.medium
+  AMI:
+    Description: test AMI
+    Type: String
+    Default: ami-
+  SecurityGroupIdList:
+    Description: test SecurityGroup
+    Type: List<AWS::EC2::SecurityGroup::Id>
+    ConstraintDescription: "sg-, sg-"
+  AvailabilityZone:
+    Description: test AvailabilityZone
+    Type: String
+    Default: eu-west-1b
+  TG:
+    Description: test Target Group for ALB
+    Type: String
+    Default: arn:aws:elasticloadbalancing:00900
+  VPCZone:
+    Description: test VPCZone
+    Type: String
+    Default: subnet-04c4d12c50a47befb
+  KeyName:
+    Description: test key
+    Type: String
+    Default: SoftServeTeam
+  ARN:
+    Description: ARN
+    Type: String
+    Default: >-
+      arn:aws:sns:eu-west-1:
+  Delay:
+    Description: >-
+      The amount of time to pause before changes are made to a resource
+    Type: String
+    Default: PT
+  MinInstancesInService:
+    Description: >-
+      The minimum number of instances that must be in service within the
+      auto-scaling group while obsolete instances are being terminated.
+    Type: String
+    Default: '1'
+  MaxBatchSize:
+    Description: The maximum number of instances that are terminated at a given time.
+    Type: String
+    Default: '1'
+Mappings: {}
+Resources:
+  LC:
+    Type: 'AWS::AutoScaling::LaunchConfiguration'
+    Properties:
+      KeyName: !Ref KeyName
+      ImageId: !Ref AMI
+      SecurityGroups: !Split
+        - "," 
+        - !Sub
+          - ${idList}
+          - idList: !Join [",",!Ref SecurityGroupIdList]
+      InstanceType: !Ref InstanceType
+      AssociatePublicIpAddress: 'true'
+  TESTSG:
+    UpdatePolicy:
+      AutoScalingRollingUpdate:
+        MinInstancesInService: !Ref MinInstancesInService
+        MaxBatchSize: !Ref MaxBatchSize
+        PauseTime: !Ref Delay
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    Properties:
+      Cooldown: '300'
+      LaunchConfigurationName: !Ref LC
+      AvailabilityZones:
+        - !Ref AvailabilityZone
+      MaxSize: '4'
+      MinSize: '1'
+      DesiredCapacity: '1'
+      VPCZoneIdentifier:
+        - !Ref VPCZone
+      TargetGroupARNs:
+        - !Ref TG
+      HealthCheckGracePeriod: '720'
+      NotificationConfiguration:
+        TopicARN: !Ref ARN
+        NotificationTypes:
+          - 'autoscaling:EC2_INSTANCE_LAUNCH'
+          - 'autoscaling:EC2_INSTANCE_LAUNCH_ERROR'
+          - 'autoscaling:EC2_INSTANCE_TERMINATE'
+          - 'autoscaling:EC2_INSTANCE_TERMINATE_ERROR'
+  Up:
+    Type: 'AWS::AutoScaling::ScalingPolicy'
+    Properties:
+      AdjustmentType: ChangeInCapacity
+      AutoScalingGroupName: !Ref TESTSG
+      Cooldown: '900'
+      ScalingAdjustment: '1'
+  Down:
+    Type: 'AWS::AutoScaling::ScalingPolicy'
+    Properties:
+      AdjustmentType: ChangeInCapacity
+      AutoScalingGroupName: !Ref TESTSG
+      Cooldown: '900'
+      ScalingAdjustment: '-1'
+  Add:
+    Type: 'AWS::CloudWatch::Alarm'
+    Properties:
+      AlarmDescription: Scale-up if CPU > 65% for 25 minutes
+      EvaluationPeriods: '5'
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Period: '300'
+      Statistic: Average
+      Threshold: '65'
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      AlarmActions:
+        - !Ref Up
+      Dimensions:
+        - Name: AutoScalingGroupName
+          Value: !Ref TESTSG
+  Remove:
+    Type: 'AWS::CloudWatch::Alarm'
+    Properties:
+      AlarmDescription: Scale-down if CPU < 10% for 60 minutes
+      EvaluationPeriods: '12'
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Statistic: Average
+      Period: '300'
+      Threshold: '10'
+      ComparisonOperator: LessThanOrEqualToThreshold
+      AlarmActions:
+        - !Ref Down
+      Dimensions:
+        - Name: AutoScalingGroupName
+          Value: !Ref TESTSG
+Outputs: {}

@@ -1,0 +1,122 @@
+provider "aws" {
+ region = "us-west-1" 
+}
+
+
+data "aws_availability_zone" "available" {}
+data "aws_ami" "latest" {
+    owners = ["amazon"]
+    most_recent = true
+    filter {
+      name = "name"
+      values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    }
+}
+
+
+resource "aws_security_group" "web_server" {
+  name        = "web server"
+  description = "security group for web server "
+  dynamic "ingress" {
+      for_each = ["80", "443"]
+      content {
+         from_port        = ingress.value
+         to_port          = ingress.value
+         protocol         = "tcp"
+         cidr_blocks      = ["0.0.0.0/0"]         
+      }
+  }  # dynamic ingress rule 
+
+  ingress {
+    description      = "Allow SSH"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["10.10.0.0/16"]
+    
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "allow_http"
+  }
+}
+
+
+resource "aws_launch_configuration" "web" {
+    name_prefix = "webServer-Higly-"
+    image_id = data.aws_ami.latest.id
+    instance_type = "t3.micro"
+    security_groups = [aws_security_group.web_server.id]
+    user_data = file("init.sh")
+
+    lifecycle {
+      create_before_destroy = true
+    }
+}
+
+resource "aws_autoscaling_group" "web" {
+  name = "ASG-${aws_launch_configuration.web.name}"
+  launch_configuration = aws_launch_configuration.web.name
+  min_size = 2
+  max_size = 2
+  min_elb_capacity = 2
+  vpc_zone_identifier = [aws_default_subnet.default_az1.id,aws_default_subnet.default_az2.id]
+  health_check_type = "ELB"
+  load_balancers = [aws_elb.web.name]
+
+  dynamic "tag" {
+      for_each = {
+          name = "WebServer in ASG"
+          owner = "Yura"
+          TAGKEY = "TAGVALUE"
+      }
+      content {
+          key = tag.key
+          value = tag.value
+          propagate_at_launch = true 
+      }
+  }
+  lifecycle {
+    create_before_destroy = true 
+  }
+
+}
+
+resource "aws_elb" "web" {
+  name = "WebServer-ELB"
+  availability_zones = [data.aws_availability_zones.available.names[0],data.aws_availability_zones.available.names[1]]
+  security_groups = [aws_security_group.web_server.id]
+  listener {
+    lb_port = 80
+    lb_protocol = "http"
+    instance_port = 80
+    instance_protocol = "http"
+  }
+  health_check {
+    unhealthy_threshold = 2
+    healthy_threshold = 2
+    timeout = 3
+    target = "HTTP:80/"
+    interval = 10
+  }
+  tags = {
+    "name" = "WebServer-ELB"
+  }
+}
+
+resource "aws_default_subnet" "default_az1" {
+    availability_zone = [data.aws_availability_zones.available.names[0]]
+  
+}
+resource "aws_default_subnet" "default_az2" {
+    availability_zone = [data.aws_availability_zones.available.names[1]]
+  
+}

@@ -1,0 +1,11 @@
+generate ssh key in linux 
+id_rsa_vsc.pub - for pub key 
+id_rsa_vsc.ppk - for private key 
+
+ssh-keygen  - this comand generate ssh pub key and privat key in path ~/.ssh
+
+generate ssh ley in windows 
+for create shh pair in windows you need to have one of this programm:
+- MobaXterm - open tme moba click on tools tab and select MobakeyGen(SSH)
+- Putty - Use putty keygen generator 
+- GitBash - ssh-keygen (file will save in /c/Users/Administarator/.ssh/id_rsa

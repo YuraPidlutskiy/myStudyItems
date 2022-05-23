@@ -1,0 +1,47 @@
+command for git 
+
+
+--------------for git config------------------ 
+git config --global user.name "Yura"
+git config --global user.email "Yura email"
+will save in home directory 
+
+--------------work with local repositories------------- 
+ git init .  - create a git database in you directory 
+ git status - for know status
+ git add * -  add file to staging status 
+ git rm    -  remove file from staging status 
+ git commit -m"some text" - crate a snapshot in local repository
+ ------------work with git log----------------------------
+ got log - for check all commits 
+ git log -1 - show the latest commit 
+ git log -1 -p - show the changes in latest commit 
+ git checkout --file.txt - to discard changes 
+ git diff --staged - shows differents staged and prev commit 
+ git remote -v - will point to current link for cloning 
+ git romete set-url origin git@github.com:yr-1997/myStudy_templates-.git - set your current ssh url for cloning 
+ ------------work with branches----------------------------
+ git branch - show all exiting branches 
+ git branch fix_error - create a new branche with name fix error 
+ git checkout fix_error - switched you on fix_error branche 
+ git checkout -b yura_error - create and switched to the branch 
+ ----------for delete branche------------------------------ 
+ git checkout master - go to master branche 
+ git branch -d fix_error - to delete branche 
+ git branche -D fix_error - to delete branche without marge 
+ -----------for marge the branche-----------------------
+ git checkout master - go to master branche 
+ git merge yura_error - marge from branche to master 
+ 
+----------- to upgrade to a previous version-----------------
+git log - you need to copy the hash of the commit with prev version 
+commit 341e4e93eb336cbbd643b646168ce63040c45974 - for example this 
+git checkout 341e4e93eb336cbbd643b646168ce63040c45974 - returned you to prev version 
+
+git reset --hard HEAD~2 - delete 2 latest version  if you have 3 version after this command you will on first version 
+git reset --soft HEAD~2 - delete 2 latest commit but version will latest this comand just delete commits  
+------------if you want to return a latest version--------------- 
+git checkout master 
+
+---------------for change the commit------------------------
+git commit --amend  - will open text redactor where you can change latest commit 

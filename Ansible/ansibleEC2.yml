@@ -1,0 +1,57 @@
+--- 
+- name: Create AWS EC2 instances 
+  hosts: all 
+  conection: local 
+  gather-facts: false 
+  vars: 
+  keypair        : mykey.pem 
+  instance_type  : t2.micro 
+  image          : ami-047bb4163c506cd98
+  region         : us-east-1
+  count          : 4
+  security_group : Ansible-SecurityGroup
+  aws_acces_key  : "{{ aws_acces_key }}"
+  aws_secret_key : "{{ aws_secret_key }}"
+
+  tasks:
+     - name: Create a security group with port 22 and 80 open to 0.0.0.0/0
+       ec2_group:
+          name       : "{{ security_group }}"
+          description: Secutiry group for serves with port 22,90,443 
+          region     : "{{ region }}"
+          rules:
+            - proto: tcp
+              from_port: 22
+              to_port: 22
+              cidr_ip: 0.0.0.0/0
+            - proto: tcp
+              from_port: 80
+              to_port: 80
+              cidr_ip: 0.0.0.0/0
+            - proto: tcp
+              from_port: 443
+              to_port: 443
+              cidr_ip: 0.0.0.0/0
+          rules_egress:
+             - proto: all
+               cidr_ip: 0.0.0.0/0
+          aws_acces_key: "{{ aws_acces_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+     - name: Create a new aws ec2 server 
+       ec2:
+         key_name : "{{ key_name }}"  
+         instance_type: "{{ instance_type }}"
+         image    : "{{ image }}"
+         group    : "{{ security_group }}"
+         region   : "{{ region }}"
+         instance_tags:
+               name: AnsibleDeployment
+               Type: EU-env
+         count    : "{{ count }}"
+         wait     : true 
+         aws_acces_key: "{{ aws_acces_key }}"
+         aws_secret_key: "{{ aws_secret_key }}"
+       register: ec2
+
+     - name: print ec2 variables 
+       debug: var=ec2         

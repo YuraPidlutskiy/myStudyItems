@@ -1,0 +1,1 @@
+aws ec2 create-image --instance-id i-9518e5b8de16 --name "exiting_instance_`date +%y%m%d`_2.1.44" --description "descript_`date +%y%m%d`_version"
