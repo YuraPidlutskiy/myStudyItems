@@ -28,7 +28,7 @@ Parameters:
   KeyName:
     Description: test key
     Type: String
-    Default: SoftServeTeam
+    Default: myTeam
   ARN:
     Description: ARN
     Type: String
