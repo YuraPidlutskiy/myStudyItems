@@ -24,7 +24,7 @@ Parameters:
   VPCZone:
     Description: test VPCZone
     Type: String
-    Default: subnet-04c4d12c50a47befb
+    Default: subnet-04c4b
   KeyName:
     Description: test key
     Type: String
