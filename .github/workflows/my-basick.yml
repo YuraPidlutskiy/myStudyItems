@@ -30,9 +30,9 @@ jobs:
         
       - name: execute few commands
         run: |
-          echo: "hi"
-          echo: "ls"
-          echo: "App name:${{env.APPLICATION_NAME}}"
+          echo "hi"
+          echo "ls"
+          echo "App name:${{env.APPLICATION_NAME}}"
           
       - name: Git clone my repo
         uses: actions/checkout@v1
