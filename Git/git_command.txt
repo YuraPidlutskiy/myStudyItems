@@ -16,6 +16,7 @@ will save in home directory
  got log - for check all commits 
  git log -1 - show the latest commit 
  git log -1 -p - show the changes in latest commit 
+ git log --pretty=oneline - oneline describe
  git checkout --file.txt - to discard changes 
  git diff --staged - shows differents staged and prev commit 
  git remote -v - will point to current link for cloning 
@@ -33,6 +34,10 @@ will save in home directory
  git checkout master - go to master branche 
  git merge yura_error - marge from branche to master 
  
+ ----remote----
+ git push --set-upstream origin yura_error  - for create 
+ git push origin --delete yura_error - for delete
+ 
 ----------- to upgrade to a previous version-----------------
 git log - you need to copy the hash of the commit with prev version 
 commit 341e4e93eb336cbbd643b646168ce63040c45974 - for example this 
@@ -45,3 +50,10 @@ git checkout master
 
 ---------------for change the commit------------------------
 git commit --amend  - will open text redactor where you can change latest commit 
+
+
+
+-----------------Git Tags-----------------------------
+git tag v1.0 - create tag 
+git push origin v1.0 - push one tag 
+git push origin --tags - push all the tags
