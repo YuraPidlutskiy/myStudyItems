@@ -1,0 +1,5 @@
+terrafrom init - for initialization 
+terraform plan - will show what be create or change 
+terraform apply - apply code 
+terraform taint aws_instance.node2 - to recreate resource 
+terraform apply -replace aws_instance.node2 - replace the resourse 
