@@ -1,0 +1,4 @@
+docker engine - docker wich installed in your computer 
+docker container - mini virtual mashine 
+docker image - iso file with software and pakages 
+dockerfile - for create image 

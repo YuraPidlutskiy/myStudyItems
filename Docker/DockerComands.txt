@@ -1,0 +1,23 @@
+docker images = list of exiting images 
+docker run hello-world = if does not exist download from dockerhub and run 
+docker pull tomcar = for download image from dockerhub
+docker run -d -p 1237:80 nginx = for download image and run container 
+docker run -it -p 1234:8080 tomcat = -it - interactive -p youracces/containerport 
+docker run -d -p 1234:8080 tomcat = -d - deamon -p youracces/containerport
+docker ps - list of exiting container 
+docker ps -a = all container wich you runing prev
+--------for delete------------ 
+docker rm containerID = delete the container 
+docker rmi hello-world = delete the image 
+docker rmi -f imageID = force delete image 
+--------for dockerfile----------
+docker build -t webserver:v1 .
+docker run -d -p7777:80 webserver:v1 
+-------Docker TAG---------------
+docker tag webserver:v1 webserver:v2
+
+-------Login to container------------
+docker exec -it containerId /bin/bash
+-------for update container data---------
+if you change somethink in your container 
+docker commit containerID webserver:v3
