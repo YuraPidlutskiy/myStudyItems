@@ -1,0 +1,18 @@
+bin - binary files (add , ls , etc)
+boot - files for system up 
+dev - devices (hard disk , mouse , keyboard , video and music adapters , etc)
+etc - configurations files 
+home - home catalog (user directory)
+lib - libraly need for working program wich stored in /bin 
+media - flash drive 
+mnt - mount for storage versions
+opt - optional additional software (chrome , opera , discord , etc )
+sbin - administration  utils (iptables , ifconfig , init , etc)
+srv - services (data about differnet services )
+tmp - temporary files (archives , etc )
+usr -user (all the user data )
+var - variables , stored (journals , logs , etc )
+root -The /root directory is the home directory of the root user. Instead of being located at /home/root, it�s located at /root. This is distinct from /, which is the system root directory.
+proc - system procces various information from the kernel , from taking information top and htop
+run - information about system in procces run 
+sys - equipment information which is provided linux carnel

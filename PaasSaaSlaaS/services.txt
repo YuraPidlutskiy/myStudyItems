@@ -1,0 +1,4 @@
+laaS - infrastructure as a Service you configure everything yourself ? include code (AWS EC2 , AWS RDS , AWS VPC , Google Compute engine)
+Paas - Platform as a Service you only deal with code, the configuration of the infrastructure is automatic ( Google App Engine , AWS App Runner , 
+AWS elastick Beanstal ,Aws Lambda ,Google Cloud Finctions)
+SaaS - software as a service - you just use the web site , you not need configure anythink(Dropbox , GMAIL , Google Docs , Google Sheets)

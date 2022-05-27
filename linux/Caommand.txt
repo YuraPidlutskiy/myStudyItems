@@ -1,0 +1,165 @@
+man – помощь
+man -k passwd - help with write command 
+info – тоже помощь
+uptime  - время с последнего включения
+uname -a - linux name 
+lscpu – данные процессора
+whatis – показывает что делает комманда
+whereis – показывает где файл
+locate – показывает где файл
+ls   - показать что в этой директории
+ls -la -list directory include hiden files 
+ls –la –R  /    - показать все на компутере
+Ctrl+Z  - отправить процесс на background
+Ctrl+C – прекратить процесс вообще
+sudo -i - super user do interactive 
+----------directory-----------------
+cd  - сменить директорию
+ls – вывести содержимое директории
+pwd – вывести путь где мы сейчас
+~    - сокращение нашей Home директории
+/    - коренная директория Linux
+..    - директория которая выше 
+.     - директория где мы сейчас
+----------Files---------------------
+cat - show file content
+less - show the file content use viewr  
+touch – создать файл или обновить время
+cp  - скопировать файл
+mv – перенести файл или переименовать
+rm – стереть файл
+rm -R - for copy dir 
+rm -rf - recursive delete 
+*.* - all 
+-v - verbouse 
+----------Directory-----------------
+mkdir – создать директорию
+rmdir – стереть пустую директорию
+cp     - копировать директорию
+mv  - переименовать или перенести директорию
+rm –R   – стереть не пустую директорию со всем что внутри
+
+sudo rm –R  /   - замочить систему Linux
+----------Link----------------
+ln   - создать дубликат файла 
+ln –s  /patn/ name  - создать symbolic линк на файл или директорию типа Shortcut
+
+---------comand for sort--------------
+find  - найти файл
+find /home -name"example.txt"
+wc  - вывести количество строк, слов, байт
+cut – вывести определенное поле из текста
+sort – вывести отсортированный текст
+---------grep------------------
+grep  - поиск определонного слова в файле            и вывод строк с этим словом
+Регулярные Выражения:
+[A-Z]*  - любое слово из больших букв
+[0-9]*   - сколько угодно подряд стоящих цифр    
+[A-Za-z]*@[A-Za-z]*.com   – простое выражение емайлов с окончанием .com
+www\.[a-z]*\.com  - любой вэб адресс  с окончанием .com
+-------->>--------------
+sort names.txt > name_sorted.txt 
+sort -n numbers.txt >> name_sorted.txt 
+grep yura /etc/* 2> err.txt - напрямляє помилки в ерр файл 
+grep yura /etc/* &> err.txt  -  і виконані і помилки  
+---------------Archive-------------------------
+tar cf  mytar.tar  Folder1   - заархивировать Folder1
+tar xf mytar.tar  - разархивировать архив
+gzip     / bzip2     / xz      – скомпрессировать файл
+gunzip /  bunzip2 / unxz  – раскомпресировать файл
+
+tar cvzf myBZIP2.bz2  Folder1    – сжать Folder1
+tar xvf  myBZIP2.bz2                  - распаковать архив
+tar tf myBZIP2.bz2    - посмотреть что внутри архива
+
+zip –r myZIP.zip Folder1   - Запаковать Folder1 в ZIP
+unzip myZIP.zip                - Распаковать файл myZIP.zip
+---------------Procces-----------------------------
+top – как Task Manager в Windows
+htop 
+free  - показать состояние памяти в байтах
+free –h  - показать состояние памяти в MB, GB
+ps          -  показать мои процессы 
+ps aux  - показать все процессы от всех пользователей
+ps aux | grep bash  - найти все процессы bash от всех пользователей
+------------account----------
+sudo  - запустить комманду используя Super User права
+su   - сменить текушего пользователя
+
+/etc/passwd    - тут хранятся все аккаунты
+/etc/shadow   - тут хранятся все пароли аккаунтов
+/etc/group    - тут хранятся все группы
+
+whoami  - показать имя текущего пользователя
+id   - показать к каким группам принадлежит пользователь
+who – показать кто сейчас в системе
+w   - показать кто сейчас в системе и что делает
+last – показать последние логины
+---------------user--------------
+useradd  -m vasya   - создать юзера vasya с домашней  директорией
+userdel –r vasya     - стереть юзера vasya с его домашней  директорией
+/etc/skel    -  это шаблон домашней директории
+passwd vasya   - изменить пароль для юзера vasya
+
+groupadd Programmers  - создать группу Programmers
+groupdel Programmers  - стереть группу Programmers
+
+usermod –aG Programmers vasya  - добавить юзера vasya в группу Programmers
+deluser vasya Programmers  - удалить юзера vasya  из групы Programmers
+---------chmod----------------------
+chown – изменить владельца файла / директории
+chgrp – изменить группу файла / директории
+сhmod – изменить права доступа на файл / директорию
+
+chmod  ugo+x  myfile.txt   довавить X всем
+сhmod  g-rw   myfile.txt   убрать RW у группы
+chmod  o=rw   myfile.txt   установить RW всем остальным
+ u = user
+ g = group
+ o = other
+ a = ugo
+
+
+chmod  777   myfile.txt   установить RWX всем
+chmod  741   myfile.txt  установить:   RWX   владельцу, R - -    группе,  - - X   всем остальным
+r = 4
+w = 2
+x = 1
+
+chmod  1777 myDir    включить StickyBit
+chmod 0777 myDir    выключить StickyBit
+----------network------------
+ifconfig          - показать мой IP адресс
+ip addr show  - показать мой IP адресс
+
+route      - показать адресс раутера Gateway
+ping        - протестировать коннекшен к адрессу
+host       - дать IP адресс вэб сайта
+dig         - дать IP адресс вэб сайта
+netstat  – выдать сетевые подключения компьютера
+--------------install----------------
+wget    - скачать файл из интернета
+
+Ubuntu/Debian/Kali/Mint Linux:
+~~~~~~~~~~~~~~~~~~~~~
+apt-get install     - скачать и установить программу
+apt-get remove   - удалить программу
+dpkg –i                - установить программу из файла .deb
+dpkg –r                - удалить программу
+
+RedHat/CentOS/Amazon Linux:
+~~~~~~~~~~~~~~
+yum install          - скачать и установить программу
+yum remove         - удалить программу
+rpm –i                  - установить программу из файла .rpm
+rpm –e                 - удалить программу
+---------bash------------
+for execute 
+chmod bashfile.sh 
+./bashfile.sh
+./myscript.sh  Vasya  Petya  Kolya
+
+$0 при этом равен  ./myscript.sh
+$1 при этом равен Vasya
+$2 при этом равен Petya
+$3 при этом равен Kolya

@@ -1,0 +1,13 @@
+ipv4 192.168.100.10
+Sub Mask 255.255.255.0
+192.168.100 - subnet id .10- host id you can use from 1 to 254
+0 and 255 - 0 its begining and 255 its broadcast 
+127.0.0.1 - my computer adress
+private ip 
+10.0.0.0
+172.16.0.0
+192.168.1.0
+
+
+ipv6 8 froups :: - 0 groups 
+::1 - my adress

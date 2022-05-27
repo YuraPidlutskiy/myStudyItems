@@ -1,0 +1,5 @@
+crontab -e - to edit file 
+crontab -l  - show schedule
+/var/spool/cron//crontabs/yura - path to crontab
+https://crontab.guru -here simple website for select crone 
+sudo nano /etc/crontab - system crontab file 

@@ -3,9 +3,20 @@ id_rsa_vsc.pub - for pub key
 id_rsa_vsc.ppk - for private key 
 
 ssh-keygen  - this comand generate ssh pub key and privat key in path ~/.ssh
+ssh-keygen -t rsa -b 2036 -m PEM -f myKey - comand for create 
+ssh-keygen -f myKey.pub -e -m PKCS8 > myKey.piblic - change formate file 
+openssl rsault -encrytp -pubin -inkey myKey.public -in message.txt -out EncryptMessage.txt - for encrypt 
+openssl rsault -decrytp  -inkey myKey.private  -in EncryptMessage.txt -out DecryptedMessage.txt - for decrypted
 
 generate ssh ley in windows 
 for create shh pair in windows you need to have one of this programm:
 - MobaXterm - open tme moba click on tools tab and select MobakeyGen(SSH)
 - Putty - Use putty keygen generator 
 - GitBash - ssh-keygen (file will save in /c/Users/Administarator/.ssh/id_rsa
+
+
+for connect ssh 
+service ssh status - for check status ssh 
+service ssh start - for start ssh 
+sudo apt install openssh-server - if ssh does not exist 
+ssh name@ip 

@@ -1,0 +1,7 @@
+sudo fdisk -l = list of disk
+lsblk - tree of disck
+sud cfdisk /dev/sdb - for create partition 
+sudo mkfs.ntfs -f  /dev/sdb1 - for formate disk 
+sudo nano /etc/fstab 
+add this string in the file - /dev/sbd1 /media/hdd2 ntfs defaul 0 0 
+sudo mount /media/hdd2 - for mount the disk 
