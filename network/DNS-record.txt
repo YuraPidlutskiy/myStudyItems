@@ -1,0 +1,9 @@
+A - Address record (IPv4)
+AAAA - Address record (IPv6)
+CNAME - Canonical Name record 
+MX - Mail Excharger record 
+NS - Nameserver record 
+PTR - Pointer record 
+SOA - Start of Authority record 
+SRV - Service Location record 
+TXT - Text record 

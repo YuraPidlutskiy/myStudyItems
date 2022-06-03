@@ -1,0 +1,5 @@
+100-continue 101 - Switching protocol 
+200-OK 202 - Accepted 
+301 - Moved Permanently 302 - Found 
+400 Bad request 403-Forbidde 404 -Page not Foind 
+500-Internal Server error , 503 Service unavailable

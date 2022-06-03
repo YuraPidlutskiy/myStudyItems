@@ -1,0 +1,3 @@
+Read Replica
+ElasticCache
+CDN - CloudFront 

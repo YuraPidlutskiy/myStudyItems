@@ -1,0 +1,2 @@
+for automaticly start the servece 
+chkconfig on 

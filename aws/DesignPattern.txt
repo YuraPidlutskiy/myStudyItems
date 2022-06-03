@@ -1,0 +1,4 @@
+Multiply Account (Dev , Staging , Prod , Shared service , Security) Multi region ?
+Transit Gateway for Network Managment 
+Centralized Firewall 
+Microservices , Servles 

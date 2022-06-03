@@ -1,0 +1,4 @@
+Multiple small Components and not Monolith Application 
+Failure Resistant
+Decentalized 
+Stateless

@@ -1,0 +1,3 @@
+Cpu utilization on Web server 
+load balancer 
+RAM and CPU utilization on  Database 

@@ -1,0 +1,10 @@
+PRO - Recovery Point Objective 
+RTO - Recovery time Objective 
+
+PRO = DATA LOSS = час > скільки інформації можна втратити при Disaster 
+
+RTO = DOWNTIME = час за скільки система відновити свою роботоздібність при Disaster 
+
+
+час від останнього бекапу до Disaster( поломка ) = RPO 
+від disaster до відновлення RPO 
